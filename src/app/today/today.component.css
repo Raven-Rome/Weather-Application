@@ -1,0 +1,22 @@
+*{
+  color: #fff;
+}
+
+.timeline{
+  display: grid;
+  grid-template-columns: repeat(8, 3rem);
+}
+
+h1{
+  grid-column: 1 / -1;
+}
+
+.temp{
+  display: flex;
+  align-items: center;
+}
+
+.sub{
+  border-left: thin orange solid;
+  padding: .7rem;
+}

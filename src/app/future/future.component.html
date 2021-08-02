@@ -1,0 +1,16 @@
+<div class="daily-forecast">
+  <h2>Forecast</h2>
+  <ul *ngFor="let forecast of weatherData">
+    <li>
+      <div class="daily-item">
+        <h3>{{ forecast.dt_txt | date: 'EEE, MMM dd' }}</h3>
+        <span class="icon">
+          <img src="assets/images/{{ forecast.weather[0].icon }}.png" alt="icon">
+        </span>
+      <span class="temp-high">{{ forecast.main.temp_max | number: '1.0-0' }}&deg; C</span>
+      <span class="temp-low">{{ forecast.main.temp_min | number: '1.0-0' }}&deg; C</span>
+      </div>
+    </li>
+  </ul>
+</div>
+

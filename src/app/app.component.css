@@ -1,0 +1,9 @@
+.wrapper {
+  min-height: 800px;
+  max-height: 1000px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("../assets/img/weather-backgrounds/Mid44.png");
+}
+
