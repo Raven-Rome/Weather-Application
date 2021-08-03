@@ -9,7 +9,7 @@ import { pluck } from 'rxjs/operators';
 })
 export class AppComponent implements OnInit {
   title = 'training';
-  current= new Date();
+  currentTime = new Date();
   timeline = [];
 
   weatherData: any = [];
@@ -18,8 +18,8 @@ export class AppComponent implements OnInit {
   weatherNow: any;
   location: any;
 
-mbData = 'https://api.mapbox.com/geocoding/v5/mapbox.places'
-owmData = 'https://api.openweathermap.org/data/2.5/onecall'
+mbData = 'https://api.mapbox.com/geocoding/v5/mapbox.places';
+owmData = 'https://api.openweathermap.org/data/2.5/onecall';
 
 data:any;
 
@@ -33,6 +33,7 @@ data:any;
       console.log(this.data);
     })
 
+    //Future Forecast
     this.forecastService.getWeatherForeCast().pipe(
       pluck('list')
     )
@@ -41,6 +42,7 @@ data:any;
     })
   }
 
+  //Future Forecast
   futureForecast(data:any){
     for(let i = 0; i < data.length; i = i + 8){
       this.weatherData.push(data[i])
@@ -53,7 +55,7 @@ data:any;
     this.selectedIndex = i;
   }
 
-
+//Today's Forecast
   dateRange(){
     const start = new Date();
     start.setHours(start.getHours()+(start.getTimezoneOffset() / 60));
