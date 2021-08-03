@@ -1,0 +1,3 @@
+http://api.openweathermap.org/data/2.5/forecast?lat=14.5031&lon=121.0581&appid=544f1467da5f4e31a83f8beddd848d9a
+https://api.openweathermap.org/data/2.5/onecall?lat=14.5031&lon=121.0581&exclude=minutely,hourly,alerts&appid=544f1467da5f4e31a83f8beddd848d9a
+https://api.mapbox.com/geocoding/v5/mapbox.places/makati.json?access_token=pk.eyJ1Ijoicm9vcmVuc3UyMCIsImEiOiJja3JxM28yajYzdm12MnJtNGk1M3g3Mm5jIn0.U_aFX7RnkyzCd8YrzhjgUA&limit=1
