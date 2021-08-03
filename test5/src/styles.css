@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+/*
+font-family: 'Lato', sans-serif;
+font-family: 'Roboto', sans-serif;
+*/
+body {
+  background-color: #1c2146;
+  margin: 0;
+  padding: 0;
+}

@@ -1,11 +1,11 @@
-<div class="wrapper" *ngIf="data">
+<div class="wrapper" *ngIf="data,features">
   <div class="main-content">
     <div class="search">
-      <input type="text" placeholder="Search for location"><button>Go</button>
+      <input type="text" placeholder="Search for location" [(ngModel)]="cityName"><button (click)="getSearchedLocation()">Go</button>
     </div>
 
     <div class="location">
-      <h2>{{location.city}}, {{location.country}}</h2>
+      <h2>{{data.features[2].place_name}}</h2>
     </div>
 
     <div class="current-weather">
@@ -14,11 +14,11 @@
           <img src="../assets/img/weather-icons/003-rainy.svg"/>
         </span>
         <span class="temperature">
-          27&deg;
+          {{datas.current.temp | number:'1.0-0' }}&deg;
         </span>
         <span class="description">
-          <h2>Light rain</h2>
-          <p>Light rain is expected. The low will be 26°.</p>
+          <h2>{{datas.current.weather[0].description }}</h2>
+          <p>{{datas.current.weather[0].description}} is expected. The low will be {{datas.daily[0].temp.min | number:'1.0-0' }}°.</p>
         </span>
       </div>
       <div class="details">
@@ -33,7 +33,7 @@
             </span>
             <span class="information">
               <i>Feels Like</i>
-              31&deg;
+              {{datas.current.feels_like | number:'1.0-0'}}&deg;
             </span>
           </li>
           <li>
@@ -46,7 +46,7 @@
             </span>
             <span class="information">
               <i>Wind</i>
-              8 km/h
+              {{datas.current.wind_speed | number:'1.0-0'}} km/h
               <svg width="14" height="14" viewBox="0 0 10 14" style="transform:rotate(70deg)">
                 <path d="M5 0L9.66895 14L5 9.33105L0.331055 14L5 0Z"></path>
               </svg>
@@ -62,7 +62,7 @@
             </span>
             <span class="information">
               <i>Visibility</i>
-              8 km
+              {{datas.current.visibility/1000}} km
             </span>
           </li>
           <li>
@@ -75,7 +75,7 @@
             </span>
             <span class="information">
               <i>Humidity</i>
-              89%
+              {{datas.current.humidity}}%
             </span>
           </li>
           <li>
@@ -88,7 +88,7 @@
             </span>
             <span class="information">
               <i>Pressure</i>
-              1005 mb
+              {{datas.current.pressure}} mb
             </span>
           </li>
           <li>
@@ -101,32 +101,85 @@
             </span>
             <span class="information">
               <i>Dew Point</i>
-              26&deg;
+              {{datas.daily[0].dew_point | number:'1.0-0' }}&deg;
             </span>
           </li>
         </ul>
       </div>
     </div>
 
-<!--Future Forecast-->
     <div class="daily-forecast">
       <h2>Forecast</h2>
-        <ul *ngFor="let forecast of weatherData">
-          <li>
-            <div class="daily-item">
-              <h3>{{ forecast.dt_txt | date: 'EEE, MMM dd' }}</h3>
-              <span class="icon">
-                <img src="assets/images/{{ forecast.weather[0].icon }}.png" alt="icon">
-                <i><img src="../assets/img/water_drop_white_8x8.svg" class="droplet" />39%</i>
-              </span>
-            <span class="temp-high">{{ forecast.main.temp_max | number: '1.0-0' }}&deg; C</span>
-            <span class="temp-low">{{ forecast.main.temp_min | number: '1.0-0' }}&deg; C</span>
-            </div>
-          </li>
-        </ul>
+      <ul>
+        <li>
+          <div class="daily-item">
+            <h3>Today</h3>
+            <span class="icon">
+              <img src="../assets/img/weather-icons/013-storm-2.svg" />
+              <i><img src="../assets/img/water_drop_white_8x8.svg" class="droplet" />39%</i>
+            </span>
+            <span class="temp-high">{{datas.daily[0].temp.max|number:'1.0-0' }}&deg;</span>
+            <span class="temp-low">{{datas.daily[0].temp.min|number:'1.0-0' }}&deg;</span>
+          </div>
+        </li>
+        <li>
+          <div class="daily-item">
+            <h3>{{day[1]}}</h3>
+            <span class="icon">
+              <img src="../assets/img/weather-icons/013-storm-2.svg" />
+              <i><img src="../assets/img/water_drop_white_8x8.svg" class="droplet" />39%</i>
+            </span>
+             <span class="temp-high">{{datas.daily[1].temp.max|number:'1.0-0' }}&deg;</span>
+            <span class="temp-low">{{datas.daily[1].temp.min|number:'1.0-0' }}&deg;</span>
+          </div>
+        </li>
+        <li>
+          <div class="daily-item">
+            <h3>{{day[2]}}</h3>
+            <span class="icon">
+              <img src="../assets/img/weather-icons/013-storm-2.svg" />
+              <i><img src="../assets/img/water_drop_white_8x8.svg" class="droplet" />39%</i>
+            </span>
+             <span class="temp-high">{{datas.daily[2].temp.max|number:'1.0-0' }}&deg;</span>
+            <span class="temp-low">{{datas.daily[2].temp.min|number:'1.0-0' }}&deg;</span>
+          </div>
+        </li>
+        <li>
+          <div class="daily-item">
+            <h3>{{day[3]}}</h3>
+            <span class="icon">
+              <img src="../assets/img/weather-icons/013-storm-2.svg" />
+              <i><img src="../assets/img/water_drop_white_8x8.svg" class="droplet" />39%</i>
+            </span>
+             <span class="temp-high">{{datas.daily[3].temp.max|number:'1.0-0' }}&deg;</span>
+            <span class="temp-low">{{datas.daily[3].temp.min|number:'1.0-0' }}&deg;</span>
+          </div>
+        </li>
+        <li>
+          <div class="daily-item">
+            <h3>{{day[4]}}</h3>
+            <span class="icon">
+              <img src="../assets/img/weather-icons/013-storm-2.svg" />
+              <i><img src="../assets/img/water_drop_white_8x8.svg" class="droplet" />39%</i>
+            </span>
+             <span class="temp-high">{{datas.daily[4].temp.max|number:'1.0-0' }}&deg;</span>
+            <span class="temp-low">{{datas.daily[4].temp.min|number:'1.0-0' }}&deg;</span>
+          </div>
+        </li>
+        <li>
+          <div class="daily-item">
+            <h3>{{day[5]}}</h3>
+            <span class="icon">
+              <img src="../assets/img/weather-icons/013-storm-2.svg" />
+              <i><img src="../assets/img/water_drop_white_8x8.svg" class="droplet" />39%</i>
+            </span>
+             <span class="temp-high">{{datas.daily[5].temp.max|number:'1.0-0' }}&deg;</span>
+            <span class="temp-low">{{datas.daily[5].temp.min|number:'1.0-0' }}&deg;</span>
+          </div>
+        </li>
+      </ul>
     </div>
 
-    <!--Weather Details-->
     <div class="weather-details" style="clear: both;">
       <div class="temperature-table">
         <table>
@@ -139,17 +192,17 @@
           </thead>
           <tr>
             <td class="subhead">Temperature</td>
-            <td>16&deg;</td>
-            <td>21&deg;</td>
-            <td>18&deg;</td>
-            <td>25&deg;</td>
+            <td>{{datas.daily[0].temp.morn |number:'1.0-0'}}&deg;</td>
+            <td>{{datas.daily[0].temp.day |number:'1.0-0'}}&deg;</td>
+            <td>{{datas.daily[0].temp.eve |number:'1.0-0'}}&deg;</td>
+            <td>{{datas.daily[0].temp.night |number:'1.0-0'}}&deg;</td>
           </tr>
           <tr>
             <td class="subhead">Feels Like</td>
-            <td>16&deg;</td>
-            <td>21&deg;</td>
-            <td>18&deg;</td>
-            <td>25&deg;</td>
+            <td>{{datas.daily[0].feels_like.morn |number:'1.0-0'}}&deg;</td>
+            <td>{{datas.daily[0].feels_like.day |number:'1.0-0'}}&deg;</td>
+            <td>{{datas.daily[0].feels_like.eve |number:'1.0-0'}}&deg;</td>
+            <td>{{datas.daily[0].feels_like.night |number:'1.0-0'}}&deg;</td>
           </tr>
         </table>
       </div>
@@ -161,12 +214,12 @@
             </path>
           </svg>
           <span>Sunrise</span>
-          <span>5:38 AM</span>
+          <span>{{sunrise}} </span>
         </div>
         <div class="daylight">
           <h3>Daylight Hours</h3>
           <img src="../assets/img/WeatherDaylight.svg"/>
-          <span>12 hr 47 min</span>
+          <span>{{dayLight}}</span>
         </div>
         <div class="sunset">
           <span>
@@ -177,64 +230,7 @@
             </svg>
           </span>
           <span>Sunset</span>
-          <span>6:26 PM</span>
+          <span>{{sunset}}</span>
         </div>
       </div>
     </div>
-
-<!--Instructions-->
-    <div class="instructions">
-      <h2>Instructions</h2>
-      <p>Create an Angular application that will interact with the Geocoding and Weather service to populate the data needed for
-        the current weather and forecast. All the data that you will need can be retrieve in the API services describe in the Functional Requirement below.</p>
-      <p>You will need to get API Keys for the ff. services, sign up for a <b>FREE</b> account:</p>
-      <p>- Open Weather Map <a href="https://openweathermap.org/">https://openweathermap.org/</a></p>
-      <p>- Map Box <a href="https://www.mapbox.com/">https://www.mapbox.com/</a></p>
-      <br/>
-      <p>Functional Requirement:</p>
-      <ol>
-        <li>
-          <p>On page load, your browser must be able to determine your location, use Geolocation.getCurrentPosition().
-            Using the latitude and the longitude, query the Geocoding API to get the place name to displayin the <code>.location h2</code></p>
-        </li>
-        <li>
-          <p>User must be able to change the location using the Search location text input. Using the input provided by the user,
-            query the Map Box's Geocoding API to get the place name to display in the <code>.location h2</code></p>
-        </li>
-        <li>
-          <p>Using the latitude and the longitude, query the Open Weather Map's One Call API to fetch for the current weather and forecast of that location.</p>
-        </li>
-      </ol>
-      <div style="clear: both"></div>
-
-      <p>Geocoding API</p>
-      <code>GET https://api.mapbox.com/geocoding/v5/mapbox.places/[location-to-search|long,lat].json?access_token=(mapbox-api-key)&limit=1</code>
-      <p>Sample Response:</p>
-      <pre>{{ mbData | json }}</pre>
-
-
-      <p>One Call API</p>
-      <code>GET https://api.openweathermap.org/data/2.5/onecall?lat=(latitude)&lon=(longitude)&exclude=minutely,hourly&appid=(openweathermap-api-key)</code>
-      <p>Sample Response:</p>
-      <pre>{{ owmData | json }}</pre>
-
-      <p>Refer to the documentation for more details</p>
-      <p>https://docs.mapbox.com/api/search/geocoding/</p>
-      <p>https://openweathermap.org/api/one-call-api</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <h2>Attributions:</h2>
-      <p>Icons made by <a href="https://www.flaticon.com/authors/iconixar" title="iconixar">iconixar</a> from <a
-      href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p>
-      <p>Inteface inspired by <a href="#">MSN Weather</a>. Background images, icons, and svg are from <a href="#">MSN Weather</a></p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-    </div>
-  </div>
-  <div style="clear: both"></div>
-</div>
-
-
-<footer>
-  <span>Weather App - for educational purposes only</span>
-</footer>
