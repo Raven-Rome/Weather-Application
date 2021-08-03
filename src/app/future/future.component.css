@@ -7,10 +7,12 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  display: inline-block;
 }
 
 li {
   float: left;
+  display: inline;
 }
 
 .daily-forecast {

@@ -1,11 +1,17 @@
 <div *ngIf="weatherNow">
-  <div class="time">{{ currentTime | date:"HH:mm - EE MMM" }}</div>
-  <div class="location">{{ location.name }}, {{ location.country }}</div>
-  <div class="temp">
+  <div class="location">
+    <h2>Caloocan City, Philippines</h2>
+  </div>
 
-    <span><img src="assets/images/{{weatherNow.weather[0].icon}}.png" alt=""></span>
-    <h3>{{ weatherNow.main.temp | number:'1.0-0' }} &deg; C</h3>
-
+  <div class="current-weather">
+    <div class="weather">
+      <span class="icon">
+        <img src="../assets/images/{{weatherNow.weather[0].icon}}.png" alt="">
+      </span>
+      <span class="temperature">
+        {{ weatherNow.main.temp | number:'1.0-0' }} &deg; C
+      </span>
+    </div>
   </div>
 
   <div class="details">

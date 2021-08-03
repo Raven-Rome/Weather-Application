@@ -20,3 +20,13 @@ h1{
   border-left: thin orange solid;
   padding: .7rem;
 }
+
+h2 {
+  font-weight: 300;
+}
+
+.location h2 {
+  margin: 20px 0;
+  font-weight: 400;
+  font-size: 30px;
+}

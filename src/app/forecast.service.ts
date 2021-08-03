@@ -23,14 +23,14 @@ export class ForecastService {
     }).pipe(
       map((value:any)=>{
         return new HttpParams()
-        .set('lon', value.coords.longitude)
         .set('lat', value.coords.latitude)
+        .set('lon', value.coords.longitude)
         .set('units', 'metric')
         .set('exclude', 'minutely,hourly,alerts')
         .set('appid', '0875e24467d6fd28ffc047d6896c7379')
       }),
       switchMap((values)=>{
-        return this.http.get('https://api.openweathermap.org/data/2.5/forecast', { params: values });
+        return this.http.get('https://api.openweathermap.org/data/2.5/onecall', { params: values });
       })
     )
   }

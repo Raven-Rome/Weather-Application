@@ -7,10 +7,11 @@ import { ForecastService } from '../forecast.service';
   styleUrls: ['./today.component.css']
 })
 export class TodayComponent implements OnInit {
-  timeline = [];
   weatherNow: any;
   location: any;
   currentTime = new Date();
+  mbData ='https://api.mapbox.com/geocoding/v5/mapbox.places/caloocan.json';
+
 
   constructor(private forecastService: ForecastService) { }
 
@@ -33,7 +34,6 @@ export class TodayComponent implements OnInit {
     this.location = today.city;
 
     for (const forecast of today.list.slice(0, 8)) {
-      this.timeline.push();
 
       const apiDate = new Date(forecast.dt_txt).getTime();
 

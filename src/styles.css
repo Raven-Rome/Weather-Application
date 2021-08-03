@@ -1,1 +1,5 @@
-@import "https://use.fontawesome.com/releases/v5.15.3/css/all.css";
+body {
+  background-color: #1c2146;
+  margin: 0;
+  padding: 0;
+}
