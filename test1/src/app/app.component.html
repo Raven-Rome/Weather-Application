@@ -112,7 +112,7 @@
     <div class="daily-forecast">
       <h2>Forecast</h2>
         <ul *ngFor="let forecast of weatherData">
-          <li *ngIf="forecast == 0; then forecast.dt_txt">
+          <li>
             <div class="daily-item">
               <h3>{{ forecast.dt_txt | date: 'EEE, MMM dd' }}</h3>
               <span class="icon">
