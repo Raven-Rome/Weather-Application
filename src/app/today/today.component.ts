@@ -11,38 +11,18 @@ export class TodayComponent implements OnInit {
   location: any;
   currentTime = new Date();
   mbData ='https://api.mapbox.com/geocoding/v5/mapbox.places/caloocan.json';
+  ownData = 'https://api.openweathermap.org/data/2.5/onecall';
 
+  data: any;
 
   constructor(private forecastService: ForecastService) { }
 
   ngOnInit(): void {
-    this.forecastService.getWeatherForecast().subscribe(data=>{
-      this.getTodayForecast(data)
+    const result = this.forecastService.getWeatherForecast();
+    result.subscribe(result =>{
+      this.data = result;
+      console.log(this.data);
     })
-  }
-
-  dateRange(){
-    const start = new Date();
-    start.setHours(start.getHours()+(start.getTimezoneOffset() / 60));
-    const to = new Date(start);
-    to.setHours(to.getHours() + 2, to.getMinutes() + 59, to.getSeconds() + 59);
-
-    return { start, to }
-  }
-  getTodayForecast(today: any){
-
-    this.location = today.city;
-
-    for (const forecast of today.list.slice(0, 8)) {
-
-      const apiDate = new Date(forecast.dt_txt).getTime();
-
-      if(this.dateRange().start.getTime() <= apiDate && this.dateRange().to.getTime() >= apiDate){
-          this.weatherNow = forecast;
-          console.log(this.weatherNow);
-      }
-
-    }
   }
 
 }
