@@ -21,15 +21,16 @@ export class ForecastService {
       .set('lat', lat)
       .set('lon', lon)
       .set('units', 'metric')
+      .set('exclude', 'minutely,hourly,alerts')
       .set('appid', this.apiKey);
 
     return this.http.get(this.url, { params });
   }
- 
+
   getWeatherDataByCityName(): Observable<any> {
     return this.http.get(`${this.mapUrl}${this.cityName}${this.responseType}${this.mapKey}`);
   }
 
 
-  
+
 }

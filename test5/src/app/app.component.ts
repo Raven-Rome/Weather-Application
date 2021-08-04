@@ -86,6 +86,10 @@ export class AppComponent implements OnInit {
       case 7:
         today='Sun'
         break;
+
+      case 8:
+        today='Mon'
+        break;
     }
 
     return today;
